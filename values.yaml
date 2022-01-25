@@ -3,7 +3,7 @@
 ##
 image:
   repository: dpage/pgadmin4
-  tag: 4.13
+  tag: latest
   pullPolicy: IfNotPresent
  
 pgadmin:
@@ -75,6 +75,7 @@ ingress:
   enabled: false
   annotations: {}
   path: /
+  className: "nginx"
   hosts: []
   tls: []
 

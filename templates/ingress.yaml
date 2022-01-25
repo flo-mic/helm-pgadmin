@@ -1,7 +1,7 @@
 {{- if .Values.ingress.enabled }}
 {{- $fullName := include "pgadmin.fullname" . -}}
 {{- $ingressPath := .Values.ingress.path -}}
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ template "pgadmin.fullname" . }}
@@ -15,6 +15,7 @@ metadata:
 {{ toYaml . | indent 4 }}
 {{- end }}
 spec:
+  ingressClassName: {{ .Values.ingress.className }}
 {{- if .Values.ingress.tls }}
   tls:
   {{- range .Values.ingress.tls }}
@@ -31,8 +32,11 @@ spec:
       http:
         paths:
           - path: {{ $ingressPath }}
+            pathType: Prefix
             backend:
-              serviceName: {{ $fullName }}
-              servicePort: http
+              service:
+                name: {{ $fullName }}
+                port: 
+                  name: http
   {{- end }}
 {{- end }}

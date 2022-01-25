@@ -88,6 +88,7 @@ The following table lists the configurable parameters of the pgAdmin chart and t
 | **Ingress**                                                                 |
 | `ingress.enabled`                                                           | Enables Ingress                                                                                                    | `false`                         |
 | `ingress.annotations`                                                       | Ingress annotations                                                                                                | `{}`                            |
+| `ingress.className`                                                         | Ingress className                                                                                                  | `"nginx""`                            |
 | `ingress.path`                                                              | Path to access frontend                                                                                            | `/`                             |
 | `ingress.hosts`                                                             | Ingress hosts                                                                                                      | `[]`                            |
 | `ingress.tls`                                                               | Ingress TLS configuration                                                                                          | `[]`                            |
