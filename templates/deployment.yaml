@@ -20,6 +20,14 @@ spec:
         app: {{ template "pgadmin.name" . }}
         release: {{ .Release.Name }}
     spec:
+      initContainers:
+        - name: {{ .Chart.Name }}-init
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', "chmod 777 /var/lib/pgadmin && exit 0"]
+          volumeMounts:
+          - name: pgadmin-data
+            mountPath: /var/lib/pgadmin
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}"
