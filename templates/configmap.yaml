@@ -13,3 +13,17 @@ data:
   servers.json: |-
 {{ toJson .Values.servers.config | indent 4 }}
 {{- end }}
+---
+{{- if .Values.pgadmin.config_local }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "pgadmin.fullname" . }}-config-local
+  labels:
+    app: {{ template "pgadmin.name" . }}
+    chart: {{ template "pgadmin.chart" . }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+data:
+{{ toJson .Values.pgadmin.config_local | indent 4 }}
+{{- end }}

@@ -64,6 +64,11 @@ spec:
             mountPath: /certs/server.key
             subPath: server.key
          {{- end }}
+         {{- if .Values.pgadmin.config_local }}
+          - name: config-local
+            mountPath: /pgadmin4/config_local.py
+            subPath: config_local.py
+         {{- end }}
          {{- if .Values.servers.enabled }}
           - name: servers-config
             mountPath: /pgadmin4/servers.json
@@ -96,6 +101,14 @@ spec:
             items:
               - key: server.cert
                 path: server.cert
+         {{- end }}
+         {{- if .Values.pgadmin.config_local }}
+        - name: config-local
+          configMap:
+            name: {{ template "pgadmin.fullname" . }}-config-local
+            items:
+            - key: config_local.py
+              path: config_local.py
          {{- end }}
          {{- if .Values.servers.enabled }}
         - name: servers-config

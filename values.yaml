@@ -21,7 +21,10 @@ pgadmin:
   #config:
   #  - name: "PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION"
   #    value: "False"
-  
+  #config_local: 
+  #  config_local.py: |- # config map. Allows loading configs in teh config_local.py file
+  #   AUTHENTICATION_SOURCES = ['webserver','internal']
+
 ## Enable persistence using Persistent Volume Claims
 ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
 ##
