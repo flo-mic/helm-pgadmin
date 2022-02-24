@@ -72,7 +72,7 @@ spec:
             mountPath: /certs/server.key
             subPath: server.key
          {{- end }}
-         {{- if .Values.pgadmin.config_local }}
+         {{- if or .Values.pgadmin.config_local .Values.pgadmin.config_local_configmap }}
           - name: config-local
             mountPath: /pgadmin4/config_local.py
             subPath: config_local.py
@@ -110,7 +110,7 @@ spec:
               - key: server.cert
                 path: server.cert
          {{- end }}
-         {{- if .Values.pgadmin.config_local }}
+         {{- if or .Values.pgadmin.config_local .Values.pgadmin.config_local_configmap }}
         - name: config-local
           configMap:
             name: {{ template "pgadmin.fullname" . }}-config-local
